@@ -1,3 +1,4 @@
 rootProject.name = 'gradle-in-action'
 
 include(':chapter03:todo-webapp')
+include(':chapter03:todo-app-external-dependency')
