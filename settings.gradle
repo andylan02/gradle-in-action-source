@@ -2,3 +2,13 @@ rootProject.name = 'gradle-in-action'
 
 include(':chapter03:todo-webapp')
 include(':chapter03:todo-app-external-dependency')
+include(':chapter04:add-task-actions')
+include(':chapter04:defaulttask-group-description-props')
+include(':chapter04:listing_04_01-task-dependencies')
+include(':chapter04:finalizer-task')
+include(':chapter04:listing_04_02-project-version-pogo')
+include(':chapter04:listing_04_03-configuration-task')
+include(':chapter04:listing_04_05-task-inputs-outputs')
+include(':chapter04:listing_04_07-custom-task-usage')
+include(':chapter04:listing_04_10-built-in-tasks')
+include(':chapter04:listing_04_12-task-rule')
