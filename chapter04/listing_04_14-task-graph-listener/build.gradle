@@ -22,7 +22,7 @@ ProjectVersion readVersion() {
 }
 
 class ReleaseVersionListener implements TaskExecutionGraphListener {
-    final static String releaseTaskPath = ':release'
+    final static String releaseTaskPath = ':chapter04:listing_04_14-task-graph-listener:release'
 
     @Override
     void graphPopulated(TaskExecutionGraph taskGraph) {
@@ -60,8 +60,10 @@ task backupReleaseDistribution(type: Copy) {
     into "$buildDir/backup"
 }
 
-task release(dependsOn: backupReleaseDistribution) << {
-    logger.quiet 'Releasing the project...'
+task release(dependsOn: backupReleaseDistribution) {
+    doLast {
+        logger.quiet 'Releasing the project...'
+    }
 }
 
 tasks.addRule("Pattern: increment<Classifier>Version – Increments the project version classifier.") { String taskName ->
