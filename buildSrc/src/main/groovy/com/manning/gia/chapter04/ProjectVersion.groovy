@@ -1,4 +1,4 @@
-package com.manning.gia
+package com.manning.gia.chapter04
 
 class ProjectVersion {
     Integer major

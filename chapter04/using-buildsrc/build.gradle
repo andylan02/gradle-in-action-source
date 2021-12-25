@@ -1,5 +1,5 @@
-import com.manning.gia.ProjectVersion
-import com.manning.gia.ReleaseVersionTask
+import com.manning.gia.chapter04.ProjectVersion
+import com.manning.gia.chapter04.ReleaseVersionTask
 
 ext.versionFile = file('version.properties')
 project.version = readVersion()
