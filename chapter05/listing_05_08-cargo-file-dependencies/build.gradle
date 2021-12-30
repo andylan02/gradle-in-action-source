@@ -5,7 +5,8 @@ configurations {
     }
 }
 
-task deployToLocalTomcat << {
+task deployToLocalTomcat {
+    doLast {
     FileTree cargoDependencies = configurations.getByName('cargo').asFileTree
     ant.taskdef(resource: 'cargo.tasks', classpath: cargoDependencies.asPath)
 
@@ -16,6 +17,7 @@ task deployToLocalTomcat << {
 
         zipUrlInstaller(installUrl: 'http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.32/bin/apache-tomcat-7.0.32.zip')
     }
+}
 }
 
 dependencies {
