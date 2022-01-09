@@ -1,1 +1,2 @@
+rootProject.name= "gralde-06-07"
 include 'model', 'repository', 'web'

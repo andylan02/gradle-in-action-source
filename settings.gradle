@@ -29,3 +29,5 @@ include(':chapter05:listing_05_11-flat-directory-repository')
 include(':chapter05:listing_05_12-printing-cargo-dependencies')
 include(':chapter05:cargo-dependencies-fail-on-version-conflict')
 include(':chapter05:cargo-dependencies-force')
+
+includeBuild('chapter06/listing_06_07-09-todo-individual-build-scripts')
