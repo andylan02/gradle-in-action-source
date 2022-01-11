@@ -31,3 +31,8 @@ include(':chapter05:cargo-dependencies-fail-on-version-conflict')
 include(':chapter05:cargo-dependencies-force')
 
 includeBuild('chapter06/listing_06_07-09-todo-individual-build-scripts')
+
+includeBuild('chapter07/listing_07_01-02-junit-test-failing')
+includeBuild('chapter07/listing_07_01-02-junit-test-successful')
+includeBuild('chapter07/listing_07_05-mixed-test-frameworks')
+includeBuild('chapter07/listing_07_06-test-report-aggregation')

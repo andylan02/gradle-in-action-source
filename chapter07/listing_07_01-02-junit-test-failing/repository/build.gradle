@@ -2,7 +2,9 @@ repositories {
     mavenCentral()
 }
 
+apply plugin:'java-library'
+
 dependencies {
-    compile project(':model')
-    testCompile 'junit:junit:4.11'
+    api project(':model')
+    testImplementation 'junit:junit:4.11'
 }
