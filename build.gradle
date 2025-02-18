@@ -1,11 +1,11 @@
 import com.manning.gia.sanitycheck.tasks.BuildExerciser
 
-ext.supportedGradleVersion = '1.7'
+ext.supportedGradleVersion = '6.8.3'
 
 task verifyListings(type: BuildExerciser, group: 'Gradle in Action', description: 'Verifies that listings can be run successfully.') {
     gradleVersion = supportedGradleVersion
 }
-
-task wrapper(type: Wrapper) {
-    gradleVersion = supportedGradleVersion
-}
+//
+//task wrapper(type: Wrapper) {
+//    gradleVersion = supportedGradleVersion
+//}
