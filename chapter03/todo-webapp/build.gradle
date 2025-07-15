@@ -4,6 +4,10 @@ plugins {
     id 'org.gretty' version('3.0.5')
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     providedCompile 'javax.servlet:servlet-api:2.5',
             'javax.servlet.jsp:jsp-api:2.1'
