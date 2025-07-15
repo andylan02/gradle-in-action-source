@@ -1,7 +1,9 @@
 rootProject.name = 'gradle-in-action'
 
 include(':chapter03:todo-webapp')
+//include(':chapter03:todo-webapp-customized')
 include(':chapter03:todo-app-external-dependency')
+include(':chapter03:todo-webapp-jetty-customized')
 
 include(':chapter04:add-task-actions')
 include(':chapter04:defaulttask-group-description-props')
