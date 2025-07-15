@@ -8,7 +8,7 @@ ProjectVersion readVersion() {
     logger.quiet 'Reading the version file.'
 
     if (!versionFile.exists()) {
-        throw new GradleException("Required version file does not exit: $versionFile.canonicalPath")
+        throw new GradleException("Required version file does not exist: $versionFile.canonicalPath")
     }
 
     Properties versionProps = new Properties()
