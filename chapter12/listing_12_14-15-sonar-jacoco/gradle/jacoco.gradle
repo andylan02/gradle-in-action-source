@@ -1,15 +1,35 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
+apply plugin: 'jacoco'
 
-    dependencies {
-        classpath 'org.ajoberstar:gradle-jacoco:0.3.0'
+jacoco {
+    toolVersion = "0.8.7"
+}
+
+test {
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        csv.enabled = false
     }
 }
 
-apply plugin: org.ajoberstar.gradle.jacoco.plugins.JacocoPlugin
-
-jacoco {
-    integrationTestTaskName = 'integrationTest'
+// Support integration tests if they exist
+tasks.whenTaskAdded { task ->
+    if (task.name == 'integrationTest' && task instanceof Test) {
+        task.finalizedBy 'jacocoIntegrationTestReport'
+        
+        tasks.create('jacocoIntegrationTestReport', JacocoReport) {
+            dependsOn task
+            executionData task
+            sourceSets sourceSets.main
+            reports {
+                xml.enabled = true
+                html.enabled = true
+            }
+        }
+    }
 }
