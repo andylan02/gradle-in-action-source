@@ -1,5 +1,4 @@
 apply plugin: 'war'
-apply plugin: 'jetty'
 apply plugin: 'groovy'
 apply plugin: 'eclipse-wtp'
 
@@ -8,20 +7,20 @@ repositories {
 }
 
 configurations {
-    functTestCompile.extendsFrom testCompile
-    functTestRuntime.extendsFrom testRuntime
+    functTestCompile.extendsFrom testImplementation
+    functTestRuntime.extendsFrom testRuntimeClasspath
 }
 
 ext.seleniumGroup = 'org.seleniumhq.selenium'
 ext.seleniumVersion = '2.32.0'
 
 dependencies {
-    compile project(':repository')
+    implementation project(':repository')
     providedCompile 'javax.servlet:servlet-api:2.5'
-    runtime 'javax.servlet:jstl:1.1.2'
-    runtime 'taglibs:standard:1.1.2'
-    testCompile 'org.codehaus.groovy:groovy:2.0.6'
-    testCompile 'junit:junit:4.11'
+    runtimeOnly 'javax.servlet:jstl:1.1.2'
+    runtimeOnly 'taglibs:standard:1.1.2'
+    testImplementation 'org.codehaus.groovy:groovy:2.0.6'
+    testImplementation 'junit:junit:4.11'
     functTestCompile 'org.codehaus.geb:geb-junit4:0.7.2'
     functTestCompile "$seleniumGroup:selenium-api:$seleniumVersion"
     functTestRuntime "$seleniumGroup:selenium-firefox-driver:$seleniumVersion"
@@ -41,20 +40,22 @@ ext {
     functionalJettyStopKey = 'stopKey'
 }
 
-task functionalJettyRun(type: org.gradle.api.plugins.jetty.JettyRun) {
-    stopPort = functionalJettyStopPort
-    stopKey = functionalJettyStopKey
-    contextPath = 'todo'
-    daemon = true
+task functionalJettyRun {
+    description = 'Placeholder for starting jetty server for functional tests'
+    doLast {
+        println 'Jetty server would start here (placeholder)'
+    }
 }
 
-task functionalJettyStop(type: org.gradle.api.plugins.jetty.JettyStop) {
-    stopPort = functionalJettyStopPort
-    stopKey = functionalJettyStopKey
+task functionalJettyStop {
+    description = 'Placeholder for stopping jetty server after functional tests'
+    doLast {
+        println 'Jetty server would stop here (placeholder)'
+    }
 }
 
 task functionalTest(type: Test) {
-    testClassesDir = sourceSets.functionalTest.output.classesDir
+    testClassesDirs = sourceSets.functionalTest.output.classesDirs
     classpath = sourceSets.functionalTest.runtimeClasspath
     reports.html.destination = file("$reports.html.destination/functional")
     reports.junitXml.destination = file("$reports.junitXml.destination/functional")

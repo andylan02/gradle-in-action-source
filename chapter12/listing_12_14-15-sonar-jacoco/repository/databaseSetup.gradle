@@ -73,9 +73,9 @@ class PortFinder {
             if (available(i)) {
                 return i
             }
+        }
 
             throw new RuntimeException("Could not find an available port between $MIN_PORT_NUMBER and $MAX_PORT_NUMBER")
-        }
     }
 
     private static boolean available(final int port) {

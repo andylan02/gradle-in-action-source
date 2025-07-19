@@ -1,12 +1,13 @@
 apply plugin: 'war'
-apply plugin: 'jetty'
+// apply plugin: 'jetty' // Deprecated plugin, commented out
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile project(':repository')
+    implementation project(':repository')
+    implementation project(':model')
     providedCompile 'javax.servlet:servlet-api:2.5'
-    runtime 'javax.servlet:jstl:1.1.2'
+    runtimeOnly 'javax.servlet:jstl:1.1.2'
 }

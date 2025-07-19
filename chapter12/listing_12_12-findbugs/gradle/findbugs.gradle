@@ -1,12 +1,17 @@
-apply plugin: 'findbugs'
-
-findbugs {
-    toolVersion = '2.0.1'
+spotbugs {
+    toolVersion = '4.6.0'
     ignoreFailures = true
     effort = 'max'
 }
 
-tasks.withType(FindBugs) {
+spotbugsMain {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+spotbugsTest {
     reports {
         xml.enabled = false
         html.enabled = true
