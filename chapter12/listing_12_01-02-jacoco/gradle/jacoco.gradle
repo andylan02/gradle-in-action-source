@@ -1,15 +1,20 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'org.ajoberstar:gradle-jacoco:0.3.0'
-    }
-}
-
-apply plugin: org.ajoberstar.gradle.jacoco.plugins.JacocoPlugin
+apply plugin: 'jacoco'
 
 jacoco {
-    integrationTestTaskName = 'integrationTest'
+    toolVersion = "0.8.7"
+}
+
+// Configure Jacoco for all Test tasks
+tasks.withType(Test) {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
 }
