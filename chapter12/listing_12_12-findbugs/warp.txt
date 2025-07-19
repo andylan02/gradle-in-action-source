@@ -1,0 +1,48 @@
+Great! There are test reports and results. Let me check the test result to see if the integration test passed:
+D:\02\gradle-in-action-source\chapter12\listing_12_12-findbugs\repository\build\test-results\integrationTest\TEST-com.manning.gia.todo.repository.H2ToDoRepositoryIntegTest.xml
+Perfect! Let me also check the HTML test report for a more readable view:
+D:\02\gradle-in-action-source\chapter12\listing_12_12-findbugs\repository\build\reports\tests\integrationTest\index.html
+Excellent! Let me also run the regular unit tests to show a complete testing picture:
+Perfect!
+
+✅ Integration Tests Successfully Executed!
+
+The integration tests have been successfully run with the following results:
+
+Integration Test Results:
+•  Test Class: H2ToDoRepositoryIntegTest
+•  Tests Run: 1 test (testInsertToDoItem)
+•  Test Status: ✅ PASSED
+•  Duration: 0.269 seconds
+•  Success Rate: 100%
+•  Failures: 0
+•  Ignored: 0
+
+What the Integration Test Does:
+The integration test (testInsertToDoItem) performs a complete end-to-end database integration test:
+
+1. Database Setup: Starts an H2 database server (TCP server running on port 1030)
+2. Schema Creation: Runs the database schema creation script (create-todo.sql)
+3. Test Execution:
+•  Creates a new ToDoItem with the name "Write integration tests"
+•  Inserts it into the H2 database using H2ToDoRepository
+•  Retrieves the persisted item by ID
+•  Validates that the item was correctly stored and retrieved
+
+Test Infrastructure:
+•  Database: H2 in-memory database with TCP server
+•  Repository: Tests the H2ToDoRepository class
+•  Dependencies: Integrated with the model project for ToDoItem class
+•  Build Process: Automatically starts database → runs schema → executes tests → validates results
+
+Reports Generated:
+•  XML Report: TEST-com.manning.gia.todo.repository.H2ToDoRepositoryIntegTest.xml
+•  HTML Report: Interactive HTML report at build/reports/tests/integrationTest/index.html
+
+The integration test successfully validates that the application can:
+•  Connect to a real database
+•  Execute SQL operations (INSERT, SELECT)
+•  Handle domain model persistence
+•  Maintain data integrity
+
+This demonstrates that the complete integration between the repository layer and the database is working correctly! 🎉
