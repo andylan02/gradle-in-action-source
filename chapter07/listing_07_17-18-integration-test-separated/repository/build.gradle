@@ -1,3 +1,5 @@
+apply plugin: 'groovy'
+apply plugin:'java-library'
 apply from: 'databaseSetup.gradle'
 
 repositories {
@@ -5,9 +7,12 @@ repositories {
 }
 
 dependencies {
-    compile project(':model')
-    runtime 'com.h2database:h2:1.3.170'
-    testCompile 'junit:junit:4.11'
+    api project(':model')
+    testImplementation 'junit:junit:4.11'
+    testImplementation 'org.testng:testng:6.8'
+    testImplementation 'org.codehaus.groovy:groovy:2.0.6'
+    testImplementation 'org.spockframework:spock-core:0.7-groovy-2.0'
+    testImplementation 'com.h2database:h2:1.3.170'
 }
 
 test {
@@ -19,7 +24,7 @@ sourceSets {
     integrationTest {
         java.srcDir file('src/integTest/java')
         resources.srcDir file('src/integTest/resources')
-        compileClasspath = sourceSets.main.output + configurations.testRuntime
+        compileClasspath = sourceSets.main.output + configurations.testCompileClasspath
         runtimeClasspath = output + compileClasspath
     }
 }
@@ -27,11 +32,11 @@ sourceSets {
 task integrationTest(type: Test) {
     description = 'Runs the integration tests.'
     group = 'verification'
-    testClassesDir = sourceSets.integrationTest.output.classesDir
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
     classpath = sourceSets.integrationTest.runtimeClasspath
     reports.html.destination = file("$reports.html.destination/integration")
     reports.junitXml.destination = file("$reports.junitXml.destination/integration")
-    dependsOn startAndPrepareDatabase
+    dependsOn compileIntegrationTestJava, startAndPrepareDatabase
     finalizedBy stopDatabase
 }
 
