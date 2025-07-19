@@ -1,0 +1,72 @@
+Now I need to add the createJDependTasks function and the main JDepend task implementation:
+Good! JDepend is now running, but there are some issues to fix:
+
+1. The test directory doesn't exist (which is normal)
+2. There's an XML parsing error in the XSLT transformation
+Perfect! Let me check one of the generated HTML reports to see what JDepend analysis produced:
+D:\02\gradle-in-action-source\chapter12\listing_12_13-jdepend\model\build\reports\jdepend\jdepend_main.html (1-200)
+Let me also run just the JDepend tasks to see them in action:
+Perfect! Let me also verify that we can see all the JDepend tasks:
+✅ JDepend Plugin Successfully Fixed!
+
+I have successfully resolved the missing JDepend plugin issue by implementing a modern replacement for the deprecated plugin. Here's what was accomplished:
+
+🔧 Issues Fixed:
+
+1. Replaced Deprecated JDepend Plugin: The old jdepend plugin was removed from Gradle, so I replaced it with a custom implementation using JavaExec tasks
+2. Fixed Jetty Plugin: Also replaced the deprecated jetty plugin with the modern Gretty plugin
+3. Handled Empty Source Sets: Fixed XML parsing errors by properly handling cases where source sets have no classes
+4. Updated XsltReport Task: Enhanced the custom XSLT transformation task to handle empty XML files
+
+✅ New JDepend Implementation:
+
+•  Configuration: Uses jdepend:jdepend:2.9.1 dependency
+•  Tasks Created: For each source set:
+•  jdependMain - Analyzes main source code
+•  jdependTest - Analyzes test source code
+•  Report generation tasks for HTML and DOT formats
+•  Smart Handling: Only runs JDepend analysis when classes exist, avoiding empty file issues
+
+✅ Generated Reports:
+
+The build now successfully generates JDepend reports:
+•  HTML Reports: Interactive dependency analysis reports
+•  DOT Reports: Graphviz format for dependency visualization
+•  XML Reports: Raw analysis data for further processing
+
+✅ Report Locations:
+•  model/build/reports/jdepend/jdepend_main.html
+•  repository/build/reports/jdepend/jdepend_main.html
+•  repository/build/reports/jdepend/jdepend_test.html
+•  web/build/reports/jdepend/jdepend_main.html
+
+✅ JDepend Analysis Features:
+•  Package Dependencies: Analyzes coupling between packages
+•  Abstractness: Measures abstract vs concrete classes ratio
+•  Instability: Measures package's resilience to change
+•  Distance: Balance between abstractness and stability
+•  Cyclic Dependencies: Detects dependency cycles (none found!)
+
+The JDepend functionality is now fully operational and provides valuable insights into the codebase's architectural quality! 🎉
+
+
+
+58 .\gradlew.bat
+59  .\gradlew.bat tes
+60 .\gradlew.bat build
+61 .\gradlew.bat build
+62 .\gradlew.bat build
+63 Get-ChildItem -Path "D:\02\gradle-in-action-source\chapter12\listing_12_13-jdepend" -Recurse -Name "*jdepend*"
+64 Get-ChildItem -Path "D:\02\gradle-in-action-source\chapter12\listing_12_13-jdepend\model\build\reports\jdepend" -Force
+65 .\gradlew.bat clean
+66 .\gradlew.bat build
+67 .\gradlew.bat tasks --group=verification
+68 Get-ChildItem -Path "D:\02\gradle-in-action-source\chapter12\listing_12_13-jdepend" -Recurse -Name "*jdepend*" -Include "*.xml","*.html","*.dot"
+69 .\gradlew.bat :repository:jdependMain
+70 .\gradlew.bat tasks | Select-String "jdepend"
+
+72 .\gradlew.bat
+73 .\\gradlew.bat tasks
+74 .\\gradlew.bat jdependMain
+75 .\\gradlew.bat jdependTest
+76 .\\gradlew.bat build
