@@ -1,3 +1,5 @@
+//version = new ProjectVersion(0, 1, Boolean.TRUE)
+//version = new ProjectVersion(0, 1, Boolean.FALSE)
 version = new ProjectVersion(0, 1)
 
 class ProjectVersion {

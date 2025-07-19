@@ -5,7 +5,7 @@ task loadVersion {
 }
 
 ProjectVersion readVersion() {
-    logger.quiet 'Reading the version file.'
+    logger.quiet '==========Reading the version file.'
 
     if (!versionFile.exists()) {
         throw new GradleException("Required version file does not exist: $versionFile.canonicalPath")

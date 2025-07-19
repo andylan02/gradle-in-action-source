@@ -54,7 +54,7 @@ task release(dependsOn: backupReleaseDistribution) {
 }
 
 // gradlew chapter04:listing_04_12-task-rule:incrementMajorVersion
-// gradlew chapter04:listing_04_12-task-rule:incrementMajorVersion
+// gradlew chapter04:listing_04_12-task-rule:incrementMinorVersion
 tasks.addRule("Pattern: increment<Classifier>Version – Increments the project version classifier.") { String taskName ->
     if (taskName.startsWith('increment') && taskName.endsWith('Version')) {
         task(taskName) {

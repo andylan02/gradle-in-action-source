@@ -1,9 +1,19 @@
+project.ext.myProp = '11111myValue'
+
+ext {
+    someOtherProp = 123
+}
+
+assert myProp == '11111myValue'
+println project.someOtherProp
+ext.someOtherProp = 567
+
 task first {
-    doLast { println "first" }
+    doLast { println "===============first" }
 }
 task second{
     doLast{
-        println "second"
+        println "second================"
     }
 }
 first.finalizedBy second
