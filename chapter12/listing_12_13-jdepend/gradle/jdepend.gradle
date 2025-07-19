@@ -1,29 +1,58 @@
-apply plugin: 'jdepend'
+configurations {
+    jdepend
+}
+
+dependencies {
+    jdepend 'jdepend:jdepend:2.9.1'
+}
 
 def configDir = new File(rootDir, 'config')
 ext.jdependConfigDir = "$configDir/jdepend"
 
-jdepend {
-    toolVersion = '2.9.1'
-    ignoreFailures = true
-}
-
-tasks.withType(JDepend) {
-    reports {
-        text.enabled = false
-        xml.enabled = true
-    }
-}
-
 import com.manning.gia.XsltReport
 
-afterEvaluate {
-    plugins.withType(JDependPlugin) {
-        sourceSets.each { sourceSet ->
-            createReportTask(sourceSet, 'html', 'jdepend.xsl')
-            createReportTask(sourceSet, 'dot', 'jdepend2dot.xsl')
+// Create JDepend tasks for each source set
+sourceSets.each { sourceSet ->
+    createJDependTasks(sourceSet)
+}
+
+def createJDependTasks(SourceSet sourceSet) {
+    String capitalizedSourceSetName = sourceSet.name.capitalize()
+    String reportDir = "$reporting.baseDir/jdepend"
+    
+    // Create the main JDepend analysis task
+    Task jdependTask = tasks.create("jdepend${capitalizedSourceSetName}", JavaExec) {
+        description = "Runs JDepend analysis for ${sourceSet.name} classes."
+        group = 'verification'
+        
+        dependsOn sourceSet.classesTaskName
+        
+        classpath = configurations.jdepend
+        main = 'jdepend.xmlui.JDepend'
+        
+        // JDepend arguments
+        args '-file', new File(reportDir, "${sourceSet.name}.xml")
+        
+        // Only add directory if it exists and has classes
+        doFirst {
+            new File(reportDir).mkdirs()
+            def classesDirs = sourceSet.output.classesDirs.files.findAll { it.exists() && it.list()?.length > 0 }
+            if (!classesDirs.isEmpty()) {
+                args classesDirs.collect { it.absolutePath }
+            }
+        }
+        
+        // Configure to ignore failures
+        ignoreExitValue = true
+        
+        onlyIf {
+            sourceSet.output.classesDirs.files.any { it.exists() && it.list()?.length > 0 }
         }
     }
+    
+    // Create report tasks
+    createReportTask(sourceSet, 'html', 'jdepend.xsl')
+    createReportTask(sourceSet, 'dot', 'jdepend2dot.xsl')
 }
 
 def createReportTask(SourceSet sourceSet, String fileExtension, String xslFileName) {
