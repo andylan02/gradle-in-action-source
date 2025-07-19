@@ -38,8 +38,8 @@ integrationTest.dependsOn startAndPrepareDatabase
 stopDatabase.dependsOn integrationTest
 check.dependsOn stopDatabase
 
-sonarRunner {
-    sonarProperties {
+sonarqube {
+    properties {
         properties['sonar.tests'] += sourceSets.integrationTest.allSource.srcDirs
     }
 }
