@@ -1,0 +1,7 @@
+.\gradlew.bat
+.\gradlew.bat build
+.\gradlew.bat :web:tasks --group=gretty
+.\gradlew.bat :web:jettyStart
+.\gradlew.bat :web:build
+.\gradlew.bat :web:jettyStart
+.\gradlew.bat :web:dependencies --configuration runtimeClasspath
