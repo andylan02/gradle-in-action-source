@@ -16,7 +16,7 @@ class XsltReport extends DefaultTask {
 
     XsltReport() {
         onlyIf {
-            inputFile.exists()
+            inputFile.exists() && inputFile.length() > 0
         }
     }
 
