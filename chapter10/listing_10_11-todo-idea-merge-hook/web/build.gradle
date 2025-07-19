@@ -1,5 +1,6 @@
 apply plugin: 'war'
 apply plugin: 'groovy'
+apply plugin: 'idea'
 
 repositories {
     mavenCentral()
@@ -71,8 +72,13 @@ idea {
         sourceSets.functionalTest.allSource.srcDirs.each {
             testSourceDirs += it
         }
+        
+        // Note: Configuration scopes are commented out due to compatibility issues
+        // with modern Gradle versions. The functional test dependencies will still
+        // be available through the source set configuration.
 
-        scopes.TEST.plus += configurations.functTestCompile
-        scopes.TEST.plus += configurations.functTestRuntime
+
+        // scopes.TEST.plus += configurations.functTestCompile
+        // scopes.TEST.plus += configurations.functTestRuntime
     }
 }
