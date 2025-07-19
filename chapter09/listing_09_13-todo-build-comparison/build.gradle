@@ -20,6 +20,6 @@ compareGradleBuilds {
     }
     targetBuild {
         projectDir = sourceBuild.projectDir
-        gradleVersion = '1.7'
+        gradleVersion = '7.1'
     }
 }
