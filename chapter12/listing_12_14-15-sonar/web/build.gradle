@@ -9,5 +9,7 @@ dependencies {
     implementation project(':repository')
     implementation project(':model')
     providedCompile 'javax.servlet:servlet-api:2.5'
-    runtimeOnly 'javax.servlet:jstl:1.1.2'
+    // JSTL dependencies with implementation and TLD files
+    runtimeOnly 'javax.servlet:jstl:1.2'
+    runtimeOnly 'taglibs:standard:1.1.2'
 }
