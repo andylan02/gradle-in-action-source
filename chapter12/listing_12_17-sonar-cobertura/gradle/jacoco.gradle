@@ -1,0 +1,46 @@
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.8.7"
+}
+
+test {
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        csv.enabled = false
+    }
+}
+
+// Support integration tests if they exist
+tasks.whenTaskAdded { task ->
+    if (task.name == 'integrationTest' && task instanceof Test) {
+        task.finalizedBy 'jacocoIntegrationTestReport'
+        
+        tasks.create('jacocoIntegrationTestReport', JacocoReport) {
+            dependsOn task
+            executionData task
+            sourceSets sourceSets.main
+            reports {
+                xml.enabled = true
+                html.enabled = true
+            }
+        }
+    }
+}
+
+// JaCoCo coverage verification task
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.30 // 30% minimum coverage (adjust as needed)
+            }
+        }
+    }
+}
